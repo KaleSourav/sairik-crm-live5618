@@ -50,23 +50,29 @@ export default function LoginPage() {
         display:        'flex',
         alignItems:     'center',
         justifyContent: 'center',
-        background:     'linear-gradient(135deg, #fef3c7 0%, #fde68a 30%, #fdba74 70%, #fb923c 100%)',
-        padding:        '1rem'
+        background:     'linear-gradient(135deg, #FDFBF3 0%, #F5E6B2 60%, #E8D5A3 100%)',
+        padding:        '1rem',
+        fontFamily:     'Inter, sans-serif'
       }}
     >
       <div
         style={{
           background:   '#ffffff',
-          borderRadius: '1rem',
-          boxShadow:    '0 20px 60px rgba(0,0,0,0.15)',
-          padding:      '2.5rem 2rem',
+          borderRadius: '24px',
+          boxShadow:    '0 20px 60px rgba(212,175,55,0.18)',
+          border:       '1px solid #E8D5A3',
+          padding:      '2.75rem 2.5rem',
           width:        '100%',
-          maxWidth:     '400px'
+          maxWidth:     '460px'
         }}
       >
-        {/* Perfume icon */}
-        <div style={{ textAlign: 'center', fontSize: '3rem', marginBottom: '0.5rem' }}>
-          🌸
+        {/* Logo */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1.25rem' }}>
+          <img
+            src="/sairik-logo.jpg"
+            alt="SAIRIK"
+            style={{ height: '220px', width: 'auto', objectFit: 'contain', display: 'block', margin: '0 auto' }}
+          />
         </div>
 
         {/* Title */}
@@ -74,9 +80,9 @@ export default function LoginPage() {
           style={{
             textAlign:    'center',
             fontSize:     '1.75rem',
-            fontWeight:   '700',
-            color:        '#92400e',
-            marginBottom: '0.25rem'
+            fontWeight:   '800',
+            color:        '#1A1A1A',
+            marginBottom: '0.3rem'
           }}
         >
           Store Portal
@@ -87,18 +93,26 @@ export default function LoginPage() {
           style={{
             textAlign:    'center',
             fontSize:     '0.875rem',
-            color:        '#6b7280',
-            marginBottom: '1.75rem'
+            color:        '#9CA3AF',
+            marginBottom: '2rem'
           }}
         >
           Sign in to continue
         </p>
 
+        {/* Gold line accent */}
+        <div style={{ width: '40px', height: '2px', background: '#D4AF37', margin: '0 auto 1.75rem' }} />
+
         {/* Form */}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <Label htmlFor="username">Username</Label>
-            <Input
+          <div>
+            <label
+              htmlFor="username"
+              style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', color: '#6B6B6B', marginBottom: '0.4rem' }}
+            >
+              Username
+            </label>
+            <input
               id="username"
               type="text"
               placeholder="Enter your username"
@@ -106,12 +120,26 @@ export default function LoginPage() {
               onChange={(e) => setUsername(e.target.value)}
               required
               disabled={loading}
+              style={{
+                width: '100%', boxSizing: 'border-box',
+                border: '1px solid #E8D5A3', borderRadius: '12px',
+                padding: '0.65rem 1rem', background: '#fff',
+                color: '#1A1A1A', fontSize: '0.95rem',
+                outline: 'none', transition: 'border-color 0.2s'
+              }}
+              onFocus={e => (e.target.style.borderColor = '#D4AF37')}
+              onBlur={e  => (e.target.style.borderColor = '#E8D5A3')}
             />
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <Label htmlFor="password">Password</Label>
-            <Input
+          <div>
+            <label
+              htmlFor="password"
+              style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', color: '#6B6B6B', marginBottom: '0.4rem' }}
+            >
+              Password
+            </label>
+            <input
               id="password"
               type="password"
               placeholder="Enter your password"
@@ -119,10 +147,19 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               disabled={loading}
+              style={{
+                width: '100%', boxSizing: 'border-box',
+                border: '1px solid #E8D5A3', borderRadius: '12px',
+                padding: '0.65rem 1rem', background: '#fff',
+                color: '#1A1A1A', fontSize: '0.95rem',
+                outline: 'none', transition: 'border-color 0.2s'
+              }}
+              onFocus={e => (e.target.style.borderColor = '#D4AF37')}
+              onBlur={e  => (e.target.style.borderColor = '#E8D5A3')}
             />
           </div>
 
-          {/* Error — only shown when error is set */}
+          {/* Error — keep red */}
           {error && (
             <p style={{ color: '#dc2626', fontSize: '0.875rem', margin: 0 }}>
               {error}
@@ -130,24 +167,26 @@ export default function LoginPage() {
           )}
 
           {/* Submit */}
-          <Button
+          <button
             type="submit"
             disabled={loading}
             style={{
               width:           '100%',
-              backgroundColor: loading ? '#d97706' : '#b45309',
-              color:           '#ffffff',
+              background:      loading ? '#C9A84C' : '#D4AF37',
+              color:           '#fff',
               border:          'none',
-              borderRadius:    '0.5rem',
-              padding:         '0.65rem',
+              borderRadius:    '12px',
+              padding:         '0.75rem',
               fontSize:        '1rem',
-              fontWeight:      '600',
+              fontWeight:      '700',
+              letterSpacing:   '0.05em',
               cursor:          loading ? 'not-allowed' : 'pointer',
-              marginTop:       '0.5rem'
+              marginTop:       '0.5rem',
+              transition:      'background 0.2s'
             }}
           >
             {loading ? 'Signing in...' : 'Sign In'}
-          </Button>
+          </button>
         </form>
       </div>
     </div>

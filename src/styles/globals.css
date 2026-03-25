@@ -2,6 +2,13 @@
 
 @import 'tw-animate-css';
 
+@theme {
+  --animate-slide-down: slide-down 0.3s ease-out;
+  @keyframes slide-down {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(0); }
+  }
+}
 @custom-variant dark (&:is(.dark *));
 
 @import './theme.css';

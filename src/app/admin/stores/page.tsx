@@ -114,26 +114,32 @@ export default function ManageStoresPage() {
   const inactiveCount = stores.filter(s => !s.is_active).length;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f1f5f9' }}>
+    <div style={{ minHeight: '100vh', background: '#F9F7F2', fontFamily: 'Inter, sans-serif' }}>
 
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
       <header style={{
-        background: '#111827', color: '#fff',
+        background: '#fff',
+        borderBottom: '1px solid #E8D5A3',
         padding: '1rem 1.75rem',
         display: 'flex', alignItems: 'center', gap: '1rem',
-        boxShadow: '0 2px 12px rgba(0,0,0,0.4)'
+        boxShadow: '0 2px 8px rgba(212,175,55,0.08)',
+        position: 'sticky', top: 0, zIndex: 40
       }}>
         <button
           onClick={() => router.back()}
           style={{
-            background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.3)',
-            color: '#fff', borderRadius: '0.4rem', padding: '0.35rem 0.8rem',
-            cursor: 'pointer', fontWeight: '600'
+            background: '#FDFBF3', border: '1px solid #E8D5A3',
+            color: '#D4AF37', borderRadius: '8px', padding: '0.35rem 0.85rem',
+            cursor: 'pointer', fontWeight: '700', fontSize: '0.85rem'
           }}
         >
           ← Back
         </button>
-        <h1 style={{ fontSize: '1.2rem', fontWeight: '800', margin: 0 }}>Manage Stores</h1>
+        <div style={{ flex: 1 }}>
+          <h1 style={{ fontSize: '1.15rem', fontWeight: '800', margin: 0, color: '#1A1A1A' }}>Manage Stores</h1>
+          <div style={{ width: '32px', height: '2px', background: '#D4AF37', marginTop: '3px' }} />
+        </div>
+        <img src="/sairik-logo.jpg" alt="SAIRIK" style={{ height: '130px', width: 'auto', objectFit: 'contain', margin: '-45px 0' }} />
       </header>
 
       <main style={{ padding: '1.5rem', maxWidth: '900px', margin: '0 auto',
@@ -158,10 +164,11 @@ export default function ManageStoresPage() {
           <button
             onClick={() => { setShowAddForm(v => !v); setError(''); }}
             style={{
-              background: showAddForm ? '#e5e7eb' : '#111827',
-              color: showAddForm ? '#374151' : '#fff',
-              border: 'none', borderRadius: '0.5rem',
-              padding: '0.5rem 1.1rem', fontWeight: '700',
+              background: showAddForm ? '#FDFBF3' : '#D4AF37',
+              color: showAddForm ? '#6B6B6B' : '#fff',
+              border: showAddForm ? '1px solid #E8D5A3' : 'none',
+              borderRadius: '10px',
+              padding: '0.55rem 1.25rem', fontWeight: '700',
               cursor: 'pointer', fontSize: '0.9rem'
             }}
           >
@@ -172,11 +179,12 @@ export default function ManageStoresPage() {
         {/* ── ADD STORE PANEL ──────────────────────────────────────────── */}
         {showAddForm && (
           <Card style={{
-            borderRadius: '0.75rem', border: '2px solid #6366f1',
-            boxShadow: '0 4px 16px rgba(99,102,241,0.12)'
+            borderRadius: '12px', border: '2px solid #D4AF37',
+            background: '#FDFBF3',
+            boxShadow: '0 4px 16px rgba(212,175,55,0.12)'
           }}>
             <CardContent style={{ padding: '1.25rem' }}>
-              <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', fontWeight: '700', color: '#3730a3' }}>
+              <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', fontWeight: '700', color: '#1A1A1A' }}>
                 Add New Store
               </h3>
 
@@ -267,7 +275,8 @@ export default function ManageStoresPage() {
             <Card
               key={store.id}
               style={{
-                borderRadius: '0.75rem', boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
+                background: '#fff', border: '1px solid #E8D5A3',
+                borderRadius: '12px', boxShadow: '0 4px 12px rgba(212,175,55,0.08)',
                 opacity: store.is_active ? 1 : 0.65, transition: 'opacity 0.2s'
               }}
             >
@@ -342,8 +351,8 @@ export default function ManageStoresPage() {
                       <button
                         onClick={() => { setPasswordReset({ id: store.id, value: '' }); setError(''); }}
                         style={{
-                          background: '#fff', color: '#374151',
-                          border: '1px solid #d1d5db', borderRadius: '0.4rem',
+                          background: '#FDFBF3', color: '#D4AF37',
+                          border: '1px solid #E8D5A3', borderRadius: '8px',
                           padding: '0.4rem 0.85rem', fontWeight: '600',
                           cursor: 'pointer', fontSize: '0.82rem'
                         }}

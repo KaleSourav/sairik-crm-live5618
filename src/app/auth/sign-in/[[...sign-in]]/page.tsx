@@ -50,7 +50,7 @@ export default function SignInPage() {
         display:         'flex',
         alignItems:      'center',
         justifyContent:  'center',
-        background:      'linear-gradient(135deg, #fef3c7 0%, #fde68a 30%, #fdba74 70%, #fb923c 100%)',
+        background:      'linear-gradient(135deg, #FDFBF3 0%, #fde68a 30%, #fdba74 70%, #fb923c 100%)',
         padding:         '1rem'
       }}
     >
@@ -75,7 +75,7 @@ export default function SignInPage() {
             textAlign:   'center',
             fontSize:    '1.75rem',
             fontWeight:  '700',
-            color:       '#92400e',
+            color:       '#1A1A1A',
             marginBottom:'0.25rem'
           }}
         >
@@ -135,7 +135,7 @@ export default function SignInPage() {
             disabled={loading}
             style={{
               width:           '100%',
-              backgroundColor: loading ? '#d97706' : '#b45309',
+              backgroundColor: loading ? '#D4AF37' : '#D4AF37',
               color:           '#ffffff',
               border:          'none',
               borderRadius:    '0.5rem',

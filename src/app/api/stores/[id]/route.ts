@@ -83,6 +83,24 @@ export async function DELETE(
     return NextResponse.json({ error: 'Store not found' }, { status: 404 });
   }
 
+  // ── Delete child records first (FK constraint order) ─────────────────────
+  // 1. sales_records — has sales_records_store_id_fkey
+  const { error: e1 } = await supabase.from('sales_records').delete().eq('store_id', id);
+  if (e1) return NextResponse.json({ error: 'Failed to remove sales records: ' + e1.message }, { status: 500 });
+
+  // 2. stock_requests
+  const { error: e2 } = await supabase.from('stock_requests').delete().eq('store_id', id);
+  if (e2) return NextResponse.json({ error: 'Failed to remove stock requests: ' + e2.message }, { status: 500 });
+
+  // 3. store_product_status
+  const { error: e3 } = await supabase.from('store_product_status').delete().eq('store_id', id);
+  if (e3) return NextResponse.json({ error: 'Failed to remove product status: ' + e3.message }, { status: 500 });
+
+  // 4. global_oos_notifications
+  const { error: e4 } = await supabase.from('global_oos_notifications').delete().eq('store_id', id);
+  if (e4) return NextResponse.json({ error: 'Failed to remove notifications: ' + e4.message }, { status: 500 });
+
+  // ── Finally, delete the store itself ─────────────────────────────────────
   const { error: deleteError } = await supabase
     .from('stores')
     .delete()

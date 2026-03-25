@@ -64,12 +64,20 @@ export async function POST(req: NextRequest) {
     product_id,
     product_name,
     category_name,
+    variant_id,
+    size_ml,
+    quantity,
     mrp_at_sale,
-    discount_amount
+    discount_amount,
+    final_price: body_final_price,
+    overall_discount_percent,
+    phone_verified,
+    otp_verified_at,
   } = await req.json();
 
-  // Calculate final price — discount defaults to 0 if not provided
-  const final_price = mrp_at_sale - (discount_amount || 0);
+  // Use client-supplied final_price (already computed after per-item discounts).
+  // Fall back to recalculating only if not provided.
+  const final_price = body_final_price ?? (mrp_at_sale - (discount_amount || 0));
 
   // Today's date as YYYY-MM-DD
   const sale_date = new Date().toISOString().split('T')[0];
@@ -77,18 +85,23 @@ export async function POST(req: NextRequest) {
   const { data, error } = await supabase
     .from('sales_records')
     .insert({
-      // store_id ALWAYS comes from JWT token — NEVER from request body
-      store_id: user.store_id,
+      store_id:                   user.store_id,
       customer_name,
       customer_phone,
       customer_email,
       product_id,
       product_name,
       category_name,
+      variant_id:                 variant_id              ?? null,
+      size_ml:                    size_ml                 ?? null,
+      quantity:                   quantity                ?? 1,
       mrp_at_sale,
-      discount_amount: discount_amount || 0,
+      discount_amount:            discount_amount         || 0,
       final_price,
-      sale_date
+      overall_discount_percent:   overall_discount_percent || 0,
+      sale_date,
+      phone_verified:             phone_verified          ?? false,
+      otp_verified_at:            otp_verified_at         ?? null,
     })
     .select()
     .single();
