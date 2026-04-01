@@ -1,9 +1,9 @@
 import { jwtVerify } from 'jose';
 import { NextRequest, NextResponse } from 'next/server';
 
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || '');
-
 export async function middleware(req: NextRequest) {
+  const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || '');
+
   const { pathname } = req.nextUrl;
 
   const isAdmin = pathname.startsWith('/admin');
