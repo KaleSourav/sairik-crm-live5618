@@ -24,6 +24,7 @@ interface SaleRecord {
   size_label?: string | null;
   quantity?: number;
   invoice_number?: string | null;
+  overall_discount_percent?: number | null;
 }
 
 // ── Group key: date + customer + product ──────────────────────────────────────
@@ -295,6 +296,11 @@ export default function SalesHistoryPage() {
                                   <td style={{ padding: '0.6rem 0.85rem', color: '#374151' }}>₹{sale.mrp_at_sale}</td>
                                   <td style={{ padding: '0.6rem 0.85rem', color: '#dc2626', fontWeight: '500' }}>
                                     {sale.discount_amount > 0 ? `-₹${sale.discount_amount}` : '—'}
+                                    {(sale.overall_discount_percent ?? 0) > 0 && (
+                                      <span style={{ marginLeft: '0.4rem', background: '#fef2f2', color: '#dc2626', border: '1px solid #fca5a5', borderRadius: '4px', padding: '0.1rem 0.35rem', fontSize: '0.65rem', fontWeight: '700', whiteSpace: 'nowrap' }}>
+                                        +{sale.overall_discount_percent}% overall
+                                      </span>
+                                    )}
                                   </td>
                                   <td style={{ padding: '0.6rem 0.85rem', color: '#16a34a', fontWeight: '700' }}>
                                     ₹{sale.final_price.toLocaleString('en-IN')}
